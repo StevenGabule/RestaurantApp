@@ -1,3 +1,17 @@
+<?php require '../includes/db/init.php' ?>
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (Users::CheckLogin($_POST['user_email'], $_POST['user_password']) > 0) {
+        redirect_to('admin/');
+    } else {
+        $_SESSION['err'] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Oops,</strong> Credentials not found. Please try again!  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button></div>';
+    }
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -41,8 +55,8 @@
 
         .form-signin {
             width: 100%;
-            max-width: 330px;
-            padding: 15px;
+            max-width: 500px;
+            padding: 30px;
             margin: auto;
         }
 
@@ -63,31 +77,43 @@
         }
 
         .form-signin input[type="email"] {
-            margin-bottom: -1px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
+
         }
 
         .form-signin input[type="password"] {
             margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
+
         }
     </style>
 </head>
 <body class="text-center">
 
-<form class="form-signin" method="post" action="">
+<form class="form-signin bg-white shadow rounded" method="post" action="">
 
     <img class="mb-4" src="images/2037159.svg" alt="" width="100" height="100">
+
     <h1 class="h3 mb-3 font-weight-normal">Welcome back, Valencianos</h1>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" name="user_email" placeholder="Email address" required
-           autofocus>
 
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" name="user_password" class="form-control" placeholder="Password" required>
+    <?php if (isset($_SESSION['success'])): ?>
+        <?= $_SESSION['success'] ?>
+    <?php endif ?>
+    <?php unset($_SESSION['success']); ?>
 
+    <?php if (isset($_SESSION['err'])): ?>
+        <?= $_SESSION['err'] ?>
+    <?php endif ?>
+    <?php unset($_SESSION['err']); ?>
+
+    <div class="form-group">
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" name="user_email" value="johnpaulgabule@gmail.com" placeholder="Email address" required
+               autofocus>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" name="user_password" class="form-control" placeholder="Password" value="password"
+               required>
+    </div>
     <div class="checkbox mb-3">
         <label>
             <input type="checkbox" name="remember" value="remember-me"> Remember me
@@ -96,7 +122,7 @@
 
     <button class="btn btn-lg btn-dark btn-block" type="submit" name="login">Log In</button>
     <p class="mt-2">Don't have an account? <a href="register.php" class="btn-link">Register here</a></p>
-    <p class="mt-5 mb-3 text-muted">&copy; <?= date('Y') ?></p>
+    <p class="mt-3 mb-3 text-muted small">All right reserved &copy; <?= date('Y') ?></p>
 
 </form>
 <!-- Optional JavaScript -->
