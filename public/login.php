@@ -6,9 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect_to('admin/');
     } else {
         $_SESSION['err'] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Oops,</strong> Credentials not found. Please try again!  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button></div>';
+                            <strong>Oops,</strong> Credentials not found. Please try again!  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button></div>';
     }
 }
 ?>
