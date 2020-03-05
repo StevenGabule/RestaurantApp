@@ -25,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             try {
                 global $connect;
-                $q = "INSERT INTO tblusers(user_name, user_email, user_role, user_password, user_birthday,user_is_deleted) VALUES ('$user_name','$user_email',2, '$user_password', '02/12/93', 0)";
+                $q = "INSERT INTO tblusers(user_name, user_email, user_role, user_password, user_birthday,user_is_deleted) 
+                      VALUES ('$user_name','$user_email',2, '$user_password', '02/12/93', 0)";
                 if ($connect->exec($q)) {
                     $_SESSION['success'] = '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                                 <strong>Success</strong> Your registration is completed. Please login<button type="button" class="close" data-dismiss="alert" aria-label="Close">

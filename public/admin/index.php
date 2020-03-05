@@ -12,7 +12,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="restaurant_add.php">
+                        <a class="nav-link" href="restaurants.php">
                             <span data-feather="file"></span>
                             Restaurants
                         </a>
